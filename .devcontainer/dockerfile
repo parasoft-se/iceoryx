@@ -1,0 +1,19 @@
+FROM fedora:40
+
+ARG CPPTEST_STD
+ARG CPPTEST_CT
+
+RUN dnf update -y
+RUN dnf install -y make gcc gcc-g++ cmake java-17-openjdk fontconfig python3 python-unversioned-command wget curl unzip iputils git python3 nodejs npm
+RUN npm install -g @bazel/bazelisk
+
+RUN mkdir -p /opt/parasoft/cpptest/std
+RUN mkdir -p /opt/parasoft/cpptest/ct
+
+COPY ${CPPTEST_STD} /tmp/
+COPY ${CPPTEST_CT} /tmp/
+
+RUN tar -xvf /tmp/${CPPTEST_STD} -C /opt/parasoft/cpptest/std
+RUN tar -xvf /tmp/${CPPTEST_CT} -C /opt/parasoft/cpptest/ct
+
+ENV PATH="$PATH:/opt/parasoft/cpptest/ct:/opt/parasoft/cpptest/ct/bin:/opt/parasoft/cpptest/std:/opt/parasoft/cpptest/bin"
