@@ -1,4 +1,4 @@
-FROM fedora:40
+FROM fedora:38
 
 ARG CPPTEST_STD
 ARG CPPTEST_CT

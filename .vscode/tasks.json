@@ -1,3 +1,29 @@
 {
-  
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake (Local): Configure With Instrumentation",
+      "type": "shell",
+      "command": "cmake -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct/2024.1.0 -DBUILD_ALL=ON -DCMAKE_PREFIX_PATH=$(PWD)/build/dependencies/",
+      "group": "build"
+    },
+    {
+      "label": "CMake (DC): Configure With Instrumentation",
+      "type": "shell",
+      "command": "bash -c 'cmake -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct -DBUILD_ALL=ON -DCMAKE_PREFIX_PATH=$(PWD)/build/dependencies/'",
+      "group": "build"
+    },
+    {
+      "label": "CMake (Local): Build and Run",
+      "type": "shell",
+      "command": "bash -c 'cmake --build build -j24; ./build/hoofs/test/hoofs_modulestests --gtest_filter=\"vector_test\" --gtest_output=xml:build/gtest_results.xml'",
+      "group": "build"
+    },
+    {
+      "label": "CMake (DC): Build and Run",
+      "type": "shell",
+      "command": "bash -c 'cmake --build build -j8; ./build/hoofs/test/hoofs_modulestests --gtest_filter=\"vector_test\" --gtest_output=xml:build/gtest_results.xml'",
+      "group": "build"
+    }
+  ]
 }

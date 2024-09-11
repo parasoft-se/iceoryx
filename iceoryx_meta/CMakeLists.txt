@@ -21,6 +21,10 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
+if(CPPTEST_COVERAGE)
+  include(./../cpptest-coverage-ct.cmake)
+endif(CPPTEST_COVERAGE)
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/build_options.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/tests.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/install_help_and_config.cmake)
