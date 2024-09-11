@@ -21,10 +21,6 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
-if(CPPTEST_COVERAGE)
-  include(./../cpptest-coverage-ct.cmake)
-endif(CPPTEST_COVERAGE)
-
 include(${CMAKE_CURRENT_SOURCE_DIR}/build_options.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/tests.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/install_help_and_config.cmake)
@@ -38,6 +34,11 @@ if(BUILD_SHARED_LIBS)
         set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
     endif()
 endif()
+
+
+#if(CPPTEST_COVERAGE)
+#  include(./../cpptest-coverage-ct.cmake)
+#endif()
 
 # ===== Core
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../iceoryx_platform ${CMAKE_BINARY_DIR}/platform)

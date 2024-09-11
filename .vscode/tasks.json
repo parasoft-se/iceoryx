@@ -10,19 +10,19 @@
     {
       "label": "CMake (DC): Configure With Instrumentation",
       "type": "shell",
-      "command": "bash -c 'cmake -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct -DBUILD_ALL=ON -DCMAKE_PREFIX_PATH=$(PWD)/build/dependencies/'",
+      "command": "bash -c 'cmake -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct -DBUILD_ALL=ON -DCMAKE_PREFIX_PATH=$(pwd)/build/dependencies/'",
       "group": "build"
     },
     {
       "label": "CMake (Local): Build and Run",
       "type": "shell",
-      "command": "bash -c 'cmake --build build -j24; ./build/hoofs/test/hoofs_modulestests --gtest_filter=\"vector_test\" --gtest_output=xml:build/gtest_results.xml'",
+      "command": "bash -c 'cmake --build build -j24; ./build/hoofs/test/hoofs_moduletests --gtest_filter=\"*vector_test*\" --gtest_output=xml:build/gtest_results.xml'",
       "group": "build"
     },
     {
       "label": "CMake (DC): Build and Run",
       "type": "shell",
-      "command": "bash -c 'cmake --build build -j8; ./build/hoofs/test/hoofs_modulestests --gtest_filter=\"vector_test\" --gtest_output=xml:build/gtest_results.xml'",
+      "command": "bash -c 'cmake --build build -j8; ./build/hoofs/test/hoofs_moduletests --gtest_filter=\"*vector_test*\" --gtest_output=xml:build/gtest_results.xml'",
       "group": "build"
     }
   ]

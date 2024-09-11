@@ -4,7 +4,7 @@ ARG CPPTEST_STD
 ARG CPPTEST_CT
 
 RUN dnf update -y
-RUN dnf install -y make gcc gcc-g++ cmake java-17-openjdk fontconfig python3 python-unversioned-command wget curl unzip iputils git python3 nodejs npm
+RUN dnf install -y make gcc gcc-g++ cmake libacl-devel libatomic java-17-openjdk fontconfig python3 python-unversioned-command wget curl unzip iputils git python3 nodejs npm
 RUN npm install -g @bazel/bazelisk
 
 RUN mkdir -p /opt/parasoft/cpptest/std
