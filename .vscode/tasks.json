@@ -30,6 +30,12 @@
       "type": "shell",
       "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-report'",
       "group": "build"
+    },
+    {
+      "label": "CMake (Local): Compute Coverage, Index, And Generate Reports",
+      "type": "shell",
+      "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-report'",
+      "group": "build"
     }
   ]
 }
