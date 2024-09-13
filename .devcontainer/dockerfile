@@ -40,6 +40,7 @@ RUN tar xzf /tmp/actions-runner-linux-x64-${GITHUB_AGENT_VERSION}.tar.gz -C ${GI
 RUN touch ${GITHUB_RUNNER_WORKSPACE}/.host_user
 RUN echo $LOCAL_USER >> ${GITHUB_RUNNER_WORKSPACE}/.host_user
 
-#RUN /opt/actions-runner/config.sh --url https://github.com/parasoft-se/iceoryx --unattended --token ${GITHUB_AGENT_TOKEN} --name z690.fc40.vscode.devcontainer
+# Clean up tmp folder
+RUN rm -Rf /tmp/*
 
 #CMD ["/opt/actions-runner/run.sh"]
