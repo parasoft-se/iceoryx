@@ -94,6 +94,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: CpptestCTReports
+          include-hidden-files: true
           path: |
             build/.coverage/*.*
 
