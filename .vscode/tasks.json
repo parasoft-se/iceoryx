@@ -22,7 +22,7 @@
     {
       "label": "CMake (DC): Build and Run",
       "type": "shell",
-      "command": "bash -c 'cmake --build build -j8 -v; ./build/hoofs/test/hoofs_moduletests --gtest_filter=\"*vector_test*\" --gtest_output=xml:build/gtest_results.xml'",
+      "command": "bash -c 'cmake --build build -j24 -v; ./build/hoofs/test/hoofs_moduletests --gtest_filter=\"*vector_test*\" --gtest_output=xml:build/gtest_results.xml'",
       "group": "build"
     }
   ]

@@ -27,8 +27,8 @@ function (cpptest_enable_coverage)
   # Configure C/C++test compiler identifier
   set(CPPTEST_COMPILER_ID "gcc_13-64")
   # Configure coverage type(s) for instrumentation engine - see 'cpptestcc -help' for details
-  #set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -line-coverage -statement-coverage -block-coverage -decision-coverage -simple-condition-coverage -mcdc-coverage -function-coverage -call-coverage)
-  set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -line-coverage)
+  set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -line-coverage -statement-coverage -block-coverage -decision-coverage -simple-condition-coverage -mcdc-coverage -function-coverage -call-coverage)
+  #set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -line-coverage)
   # Configure coverage type(s) for reporting engine - see 'cpptestcov -help' for details
   set(CPPTEST_COVERAGE_TYPE_REPORT "LC,SC,BC,DC,SCC,MCDC,FC,CC" )
   # Configure C/C++test project name
@@ -37,7 +37,6 @@ function (cpptest_enable_coverage)
   set(CPPTEST_COVERAGE_WORKSPACE ${CPPTEST_BINARY_DIR}/cpptest-coverage/${CPPTEST_PROJECT_NAME})
   # Configure coverage log file
   set(CPPTEST_COVERAGE_LOG_FILE ${CPPTEST_COVERAGE_WORKSPACE}/${CPPTEST_PROJECT_NAME}.clog)
-  #set(CPPTEST_COVERAGE_LOG_FILE /tmp/${CPPTEST_PROJECT_NAME}.clog)
   # Configure C/C++test installation directory
   if(CPPTEST_HOME)
     set(CPPTEST_HOME_DIR ${CPPTEST_HOME})
@@ -93,12 +92,11 @@ function (cpptest_enable_coverage)
       -workspace "${CPPTEST_COVERAGE_WORKSPACE}"
       -compiler ${CPPTEST_COMPILER_ID}
       ${CPPTEST_COVERAGE_TYPE_INSTRUMENTATION}
-      #-include "regex:*"
-      #-exclude "regex:*"
-      #-include "regex:${CPPTEST_SOURCE_DIR}/*"
-      #-exclude "regex:${CPPTEST_BINARY_DIR}/*"
-      #-ignore "regex:*_test.cpp"
-      #-ignore "regex:${CPPTEST_BINARY_DIR}/*"
+      -exclude "regex:*"
+      -include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/*"
+      -exclude "regex:${CPPTEST_BINARY_DIR}/*"
+      -ignore "regex:*_test.cpp"
+      -ignore "regex:${CPPTEST_BINARY_DIR}/*"
       )
 
   # Use advanced settings file for cpptestcc, if exists
