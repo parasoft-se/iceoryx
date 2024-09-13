@@ -1,3 +1,5 @@
 {
-  "cmake.sourceDirectory": "/home/cboxrieder/Development/iceoryx/iceoryx_examples/ice_access_control"
+  "cmake.sourceDirectory": "/home/cboxrieder/Development/iceoryx/iceoryx_examples/ice_access_control",
+  "cpptest.compilerIdentifier": "gcc_13-64",
+  "cpptest.coverageDataFolder": "${workspaceFolder}/iceoryx_meta/.coverage"
 }

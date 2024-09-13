@@ -27,7 +27,7 @@ function (cpptest_enable_coverage)
   # Configure C/C++test compiler identifier
   set(CPPTEST_COMPILER_ID "gcc_13-64")
   # Configure coverage type(s) for instrumentation engine - see 'cpptestcc -help' for details
-  set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -line-coverage -statement-coverage -block-coverage -decision-coverage -simple-condition-coverage -mcdc-coverage -function-coverage -call-coverage)
+  set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -template-coverage -line-coverage -statement-coverage -block-coverage -decision-coverage -simple-condition-coverage -mcdc-coverage -function-coverage -call-coverage)
   #set(CPPTEST_COVERAGE_TYPE_INSTRUMENTATION -line-coverage)
   # Configure coverage type(s) for reporting engine - see 'cpptestcov -help' for details
   set(CPPTEST_COVERAGE_TYPE_REPORT "LC,SC,BC,DC,SCC,MCDC,FC,CC" )
@@ -78,12 +78,14 @@ function (cpptest_enable_coverage)
         PARENT_SCOPE)
   else()
     set(CPPTEST_LINKER_FLAGS
+#        "-Wl,--whole-archive \"${CPPTEST_RUNTIME_BUILD_DIR}/libcpptest_static.a\"")
         "-Wl,--whole-archive \"${CPPTEST_RUNTIME_BUILD_DIR}/libcpptest_static.a\" -Wl,--no-whole-archive")
   endif()
 
   # Add C/C++test coverage runtime library to executable linker flags
   set(CMAKE_EXE_LINKER_FLAGS
-      "${CMAKE_EXE_LINKER_FLAGS} ${CPPTEST_LINKER_FLAGS}"
+#      "${CMAKE_EXE_LINKER_FLAGS} ${CPPTEST_LINKER_FLAGS}"
+      "${CPPTEST_LINKER_FLAGS} ${CMAKE_EXE_LINKER_FLAGS}"
       PARENT_SCOPE)
 
   # Configure cpptestcc command line
@@ -93,10 +95,11 @@ function (cpptest_enable_coverage)
       -compiler ${CPPTEST_COMPILER_ID}
       ${CPPTEST_COVERAGE_TYPE_INSTRUMENTATION}
       -exclude "regex:*"
-      #-include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/container/include/iox/*"
-      -include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/test/moduletests/test_container_vector.cpp"
+      -include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/container/include/iox/detail/vector.inl"
+      #-include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/test/moduletests/test_container_vector.cpp"
       -exclude "regex:${CPPTEST_BINARY_DIR}/*"
-      #-ignore "regex:*test_container_vector.cpp"
+      #-exclude "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/test/moduletests/test_container_vector.cpp"
+      #-ignore "regex:*/test_container_vector.cpp"
       -ignore "regex:${CPPTEST_BINARY_DIR}/*"
       )
 
@@ -156,7 +159,8 @@ function (cpptest_enable_coverage)
     ${CPPTEST_HOME_DIR}/bin/cpptestcov report html
         -root ${CPPTEST_SOURCE_DIR}
         -coverage ${CPPTEST_COVERAGE_TYPE_REPORT}
-        --single-page
+#        --single-page
+        -code
         -out "${CPPTEST_SOURCE_DIR}/.coverage/coverage.html"
         "${CPPTEST_SOURCE_DIR}/.coverage"
     &&

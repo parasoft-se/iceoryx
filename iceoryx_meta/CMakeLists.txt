@@ -36,9 +36,9 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 
-if(CPPTEST_COVERAGE)
-  include(./../cpptest-coverage-ct.cmake)
-endif()
+#if(CPPTEST_COVERAGE)
+#  include(./../cpptest-coverage-ct.cmake)
+#endif()
 
 # ===== Core
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../iceoryx_platform ${CMAKE_BINARY_DIR}/platform)
