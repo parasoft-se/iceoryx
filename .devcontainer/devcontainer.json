@@ -1,6 +1,6 @@
 {
   "image": "parasoft_iceoryx_demo:latest",
-  "runArgs": [ "--rm" ]
+  "runArgs": [ "--rm", "-v /" ]
 }
 
 

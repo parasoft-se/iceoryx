@@ -2,18 +2,44 @@ FROM fedora:38
 
 ARG CPPTEST_STD
 ARG CPPTEST_CT
+ARG GITHUB_AGENT_VERSION
+ARG GITHUB_PAT
+ARG GITHUB_RUNNER_INSTALL="/opt/actions-runner"
+ARG GITHUB_RUNNER_WORKSPACE="/workspaces/github-runner"
 
 RUN dnf update -y
-RUN dnf install -y make gcc gcc-g++ cmake libacl-devel libatomic java-17-openjdk fontconfig python3 python-unversioned-command wget curl unzip iputils git python3 nodejs npm
+RUN dnf install -y make gcc gcc-g++ cmake libacl-devel libatomic java-17-openjdk fontconfig python3 python-unversioned-command wget curl unzip iputils git python3 nodejs npm jq
 RUN npm install -g @bazel/bazelisk
 
 RUN mkdir -p /opt/parasoft/cpptest/std
 RUN mkdir -p /opt/parasoft/cpptest/ct
+RUN mkdir -p ${GITHUB_RUNNER_INSTALL}
+RUN mkdir -p ${GITHUB_RUNNER_WORKSPACE}
 
 COPY ${CPPTEST_STD} /tmp/
 COPY ${CPPTEST_CT} /tmp/
+
+COPY entry.sh ${GITHUB_RUNNER_WORKSPACE}/entry.sh
+COPY unregister_agent.sh ${GITHUB_RUNNER_WORKSPACE}/unregister_agent.sh
+RUN chmod +x ${GITHUB_RUNNER_WORKSPACE}/entry.sh
+RUN chmod +x ${GITHUB_RUNNER_WORKSPACE}/unregister_agent.sh
 
 RUN tar -xvf /tmp/${CPPTEST_STD} -C /opt/parasoft/cpptest/std
 RUN tar -xvf /tmp/${CPPTEST_CT} -C /opt/parasoft/cpptest/ct
 
 ENV PATH="$PATH:/opt/parasoft/cpptest/ct:/opt/parasoft/cpptest/ct/bin:/opt/parasoft/cpptest/std:/opt/parasoft/cpptest/bin"
+ENV RUNNER_ALLOW_RUNASROOT="1"
+ENV GITHUB_PAT="${GITHUB_PAT}"
+ENV GITHUB_RUNNER_INSTALL="${GITHUB_RUNNER_INSTALL}"
+ENV GITHUB_RUNNER_WORKSPACE="${GITHUB_RUNNER_WORKSPACE}"
+
+RUN curl -o /tmp/actions-runner-linux-x64-${GITHUB_AGENT_VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v${GITHUB_AGENT_VERSION}/actions-runner-linux-x64-${GITHUB_AGENT_VERSION}.tar.gz
+RUN tar xzf /tmp/actions-runner-linux-x64-${GITHUB_AGENT_VERSION}.tar.gz -C ${GITHUB_RUNNER_INSTALL}/
+
+# Create file with local user so we can get an idea on who created the agent
+RUN touch ${GITHUB_RUNNER_WORKSPACE}/.host_user
+RUN echo $LOCAL_USER >> ${GITHUB_RUNNER_WORKSPACE}/.host_user
+
+#RUN /opt/actions-runner/config.sh --url https://github.com/parasoft-se/iceoryx --unattended --token ${GITHUB_AGENT_TOKEN} --name z690.fc40.vscode.devcontainer
+
+#CMD ["/opt/actions-runner/run.sh"]
