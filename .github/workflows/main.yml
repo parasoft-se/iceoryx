@@ -52,7 +52,7 @@ jobs:
       # Builds your CMake project. (This step is optional, as it is not required for code analysis).
       - name: Build Project
         run: |
-          cmake --build build -j24 -v
+          cmake --build build -v
 
       - name: Run Unit Tests
         run: |
