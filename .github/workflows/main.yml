@@ -46,13 +46,13 @@ jobs:
       
       - name: Configure Project
         run: |
-          git config --global --add safe.directory /workspaces/iceoryx
+          # git config --global --add safe.directory /workspaces/iceoryx
           cmake -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct -DBUILD_TEST=ON -DCMAKE_PREFIX_PATH=$(pwd)/build/dependencies/
 
       # Builds your CMake project. (This step is optional, as it is not required for code analysis).
       - name: Build Project
         run: |
-          cmake --build build -j24
+          cmake --build build -j24 -v
 
       - name: Run Unit Tests
         run: |
