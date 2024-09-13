@@ -93,7 +93,7 @@ function (cpptest_enable_coverage)
       -compiler ${CPPTEST_COMPILER_ID}
       ${CPPTEST_COVERAGE_TYPE_INSTRUMENTATION}
       -exclude "regex:*"
-      -include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/*"
+      -include "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/container/include/iox/detail/vector.inl"
       -exclude "regex:${CPPTEST_BINARY_DIR}/*"
       -ignore "regex:*_test.cpp"
       -ignore "regex:${CPPTEST_BINARY_DIR}/*"
