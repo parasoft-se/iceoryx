@@ -45,7 +45,7 @@ jobs:
         run: echo "build_id=build-$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV 
       
       - name: Configure Project
-        run: -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct -DBUILD_ALL=ON -DCMAKE_PREFIX_PATH=$(pwd)/build/dependencies/
+        run: cmake -Bbuild -Hiceoryx_meta -DCPPTEST_COVERAGE=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCPPTEST_HOME=/opt/parasoft/cpptest/ct -DBUILD_ALL=ON -DCMAKE_PREFIX_PATH=$(pwd)/build/dependencies/
 
       # Builds your CMake project. (This step is optional, as it is not required for code analysis).
       - name: Build Project
