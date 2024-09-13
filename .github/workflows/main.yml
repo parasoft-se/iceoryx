@@ -95,7 +95,7 @@ jobs:
         with:
           name: CpptestCTReports
           path: |
-            build/.coverage/*.*
+            ${{github.workspace}}/build/.coverage
 
       - name: Deploy to GitHub Pages
         id: deployment
