@@ -40,6 +40,10 @@ RUN tar xzf /tmp/actions-runner-linux-x64-${GITHUB_AGENT_VERSION}.tar.gz -C ${GI
 RUN touch ${GITHUB_RUNNER_WORKSPACE}/.host_user
 RUN echo $LOCAL_USER >> ${GITHUB_RUNNER_WORKSPACE}/.host_user
 
+# Resolve computer name to IP for DTP licensing access
+#RUN touch /etc/hosts
+#RUN echo "${DTP_SERVER_IP} ${DTP_SERVER_HOSTNAME}" >> /etc/hosts
+
 # Clean up tmp folder
 RUN rm -Rf /tmp/*
 
