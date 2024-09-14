@@ -84,8 +84,7 @@ function (cpptest_enable_coverage)
 
   # Add C/C++test coverage runtime library to executable linker flags
   set(CMAKE_EXE_LINKER_FLAGS
-#      "${CMAKE_EXE_LINKER_FLAGS} ${CPPTEST_LINKER_FLAGS}"
-      "${CPPTEST_LINKER_FLAGS} ${CMAKE_EXE_LINKER_FLAGS}"
+      "${CMAKE_EXE_LINKER_FLAGS} ${CPPTEST_LINKER_FLAGS}"
       PARENT_SCOPE)
 
   # Configure cpptestcc command line
@@ -100,6 +99,12 @@ function (cpptest_enable_coverage)
       -exclude "regex:${CPPTEST_BINARY_DIR}/*"
       #-exclude "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_hoofs/test/moduletests/test_container_vector.cpp"
       #-ignore "regex:*/test_container_vector.cpp"
+      -ignore "regex:${CPPTEST_SOURCE_DIR}/*"
+      -ignore "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_posh/*"
+      -ignore "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_platform/*"
+      -ignore "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_examples/*"
+      -ignore "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_integrationtest/*"
+      -ignore "regex:${CPPTEST_SOURCE_DIR}/../iceoryx_binding_c/*"
       -ignore "regex:${CPPTEST_BINARY_DIR}/*"
       )
 
