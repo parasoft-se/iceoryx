@@ -26,7 +26,7 @@
 
 namespace iox
 {
-// parasoft-cov-begin-suppress ALL "Only concerned about emplace"
+
 template <typename T, uint64_t Capacity>
 inline vector<T, Capacity>::vector(const uint64_t count, const T& value) noexcept
 {
@@ -81,6 +81,7 @@ inline vector<T, Capacity>::~vector() noexcept
     clear();
 }
 
+// parasoft-cov-begin-suppress ALL "Only concerned about emplace"
 template <typename T, uint64_t Capacity>
 inline vector<T, Capacity>& vector<T, Capacity>::operator=(const vector& rhs) noexcept
 {
@@ -91,8 +92,8 @@ inline vector<T, Capacity>& vector<T, Capacity>::operator=(const vector& rhs) no
 
         if constexpr (std::is_trivially_copyable<T>::value)
         {
-            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));
-            i = rhsSize;
+            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));// parasoft-cov-suppress ALL "ingore"
+            i = rhsSize;// parasoft-cov-suppress ALL "ingore"
         }
         else
         {
@@ -119,6 +120,7 @@ inline vector<T, Capacity>& vector<T, Capacity>::operator=(const vector& rhs) no
     }
     return *this;
 }
+// parasoft-cov-end-suppress
 
 template <typename T, uint64_t Capacity>
 inline vector<T, Capacity>& vector<T, Capacity>::operator=(vector&& rhs) noexcept
@@ -130,8 +132,8 @@ inline vector<T, Capacity>& vector<T, Capacity>::operator=(vector&& rhs) noexcep
 
         if constexpr (std::is_trivially_copyable<T>::value)
         {
-            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));
-            i = rhsSize;
+            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));// parasoft-cov-suppress ALL "ingore"
+            i = rhsSize;// parasoft-cov-suppress ALL "ingore"
         }
         else
         {
@@ -203,10 +205,6 @@ inline bool vector<T, Capacity>::emplace_back(Targs&&... args) noexcept
     }
     return false;
 }
-// parasoft-cov-end-suppress
-
-
-
 
 template <typename T, uint64_t Capacity>
 template <typename... Targs>
@@ -245,13 +243,10 @@ inline bool vector<T, Capacity>::emplace(const uint64_t position, Targs&&... arg
     return true;
 }
 
-
-
-// parasoft-cov-begin-suppress ALL "Only concerned about emplace"
 template <typename T, uint64_t Capacity>
 inline bool vector<T, Capacity>::push_back(const T& value) noexcept
 {
-    return emplace_back(value);
+    return emplace_back(value);// parasoft-cov-suppress ALL "ingore"
 }
 
 template <typename T, uint64_t Capacity>
@@ -419,7 +414,7 @@ inline bool vector<T, Capacity>::erase(iterator position) noexcept
         {
             if constexpr (!(std::is_trivially_destructible<T>::value))
             {
-                at_unchecked(n).~T();
+                at_unchecked(n).~T(); // parasoft-cov-suppress ALL "ingore"
             }
             uint64_t dataLen{size() - n - 1U};
             std::memmove(data() + n, data() + n + 1U, static_cast<size_t>(dataLen) * sizeof(T));
@@ -501,6 +496,5 @@ inline bool constexpr operator!=(const vector<T, CapacityLeft>& lhs, const vecto
 {
     return !(lhs == rhs);
 }
-// parasoft-cov-end-suppress
 } // namespace iox
 #endif // IOX_HOOFS_CONTAINER_VECTOR_INL
