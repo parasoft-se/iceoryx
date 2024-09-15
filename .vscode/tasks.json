@@ -26,6 +26,18 @@
       "group": "build"
     },
     {
+      "label": "CMake (Local): Clean",
+      "type": "shell",
+      "command": "bash -c 'cmake --build build --target clean'",
+      "group": "build"
+    },
+    {
+      "label": "CMake (DC): Clean",
+      "type": "shell",
+      "command": "bash -c 'cmake --build build --target clean'",
+      "group": "build"
+    },
+    {
       "label": "CMake (DC): Compute Coverage, Index, And Generate Reports",
       "type": "shell",
       "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-report'",

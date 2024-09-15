@@ -26,6 +26,7 @@
 
 namespace iox
 {
+// parasoft-cov-begin-suppress ALL "Only concerned about emplace"
 template <typename T, uint64_t Capacity>
 inline vector<T, Capacity>::vector(const uint64_t count, const T& value) noexcept
 {
@@ -202,6 +203,10 @@ inline bool vector<T, Capacity>::emplace_back(Targs&&... args) noexcept
     }
     return false;
 }
+// parasoft-cov-end-suppress
+
+
+
 
 template <typename T, uint64_t Capacity>
 template <typename... Targs>
@@ -240,6 +245,9 @@ inline bool vector<T, Capacity>::emplace(const uint64_t position, Targs&&... arg
     return true;
 }
 
+
+
+// parasoft-cov-begin-suppress ALL "Only concerned about emplace"
 template <typename T, uint64_t Capacity>
 inline bool vector<T, Capacity>::push_back(const T& value) noexcept
 {
@@ -493,5 +501,6 @@ inline bool constexpr operator!=(const vector<T, CapacityLeft>& lhs, const vecto
 {
     return !(lhs == rhs);
 }
+// parasoft-cov-end-suppress
 } // namespace iox
 #endif // IOX_HOOFS_CONTAINER_VECTOR_INL
