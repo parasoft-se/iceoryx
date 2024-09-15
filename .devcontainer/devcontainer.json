@@ -7,7 +7,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "Parasoft.vscode-cpptest"
+        "Parasoft.vscode-cpptest",
+        "george-alisson.html-preview-vscode"
       ]
     }
   }

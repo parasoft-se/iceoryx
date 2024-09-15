@@ -30,6 +30,17 @@ using namespace ::testing;
 using namespace iox;
 using namespace iox::testing;
 
+class trivial_class
+{
+public:
+    ~trivial_class()
+    {
+        m = 0;
+    }
+
+    int m;
+};
+
 class vector_test : public Test
 {
   public:
@@ -44,6 +55,8 @@ class vector_test : public Test
 
     static constexpr uint64_t VECTOR_CAPACITY{10};
     vector<uint64_t, VECTOR_CAPACITY> sut;
+    vector<trivial_class, VECTOR_CAPACITY> tsut;
+    vector<unsigned long, VECTOR_CAPACITY> ulsut;
 };
 
 TEST_F(vector_test, NewlyCreatedVectorIsEmpty)
@@ -56,6 +69,27 @@ TEST_F(vector_test, NewlyCreatedVectorHasSizeZero)
 {
     ::testing::Test::RecordProperty("TEST_ID", "f850b288-df04-43b8-b317-bec76c6c4924");
     EXPECT_THAT(sut.size(), Eq(0U));
+}
+
+TEST_F(vector_test, AssignmentOperatorTriviallyCopyable)
+{
+    ulsut.push_back(1ul);
+
+    vector<unsigned long, VECTOR_CAPACITY> copy_a(ulsut);
+    copy_a = vector<unsigned long, VECTOR_CAPACITY>{1ul};
+}
+
+TEST_F(vector_test, PushBackConstRValue)
+{
+    trivial_class a{0}, b{1};
+    tsut.push_back(a);
+    tsut.push_back(b);
+    tsut = tsut;
+}
+
+TEST_F(vector_test, EraseTriviallyCopyableNotTriviallyDestructable)
+{
+    tsut.erase(tsut.begin());
 }
 
 TEST_F(vector_test, Capacity)
@@ -1509,3 +1543,4 @@ TEST_F(vector_test, EmplaceAtPositionAfterEndBeforeCapacityExceedsFails)
     ASSERT_THAT(sut.size(), EXPECTED_SIZE);
 }
 } // namespace
+

@@ -81,7 +81,6 @@ inline vector<T, Capacity>::~vector() noexcept
     clear();
 }
 
-// parasoft-cov-begin-suppress ALL "Only concerned about emplace"
 template <typename T, uint64_t Capacity>
 inline vector<T, Capacity>& vector<T, Capacity>::operator=(const vector& rhs) noexcept
 {
@@ -92,8 +91,8 @@ inline vector<T, Capacity>& vector<T, Capacity>::operator=(const vector& rhs) no
 
         if constexpr (std::is_trivially_copyable<T>::value)
         {
-            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));// parasoft-cov-suppress ALL "ingore"
-            i = rhsSize;// parasoft-cov-suppress ALL "ingore"
+            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));
+            i = rhsSize;
         }
         else
         {
@@ -120,7 +119,6 @@ inline vector<T, Capacity>& vector<T, Capacity>::operator=(const vector& rhs) no
     }
     return *this;
 }
-// parasoft-cov-end-suppress
 
 template <typename T, uint64_t Capacity>
 inline vector<T, Capacity>& vector<T, Capacity>::operator=(vector&& rhs) noexcept
@@ -132,8 +130,8 @@ inline vector<T, Capacity>& vector<T, Capacity>::operator=(vector&& rhs) noexcep
 
         if constexpr (std::is_trivially_copyable<T>::value)
         {
-            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));// parasoft-cov-suppress ALL "ingore"
-            i = rhsSize;// parasoft-cov-suppress ALL "ingore"
+            std::memcpy(data(), rhs.data(), static_cast<size_t>(rhsSize) * sizeof(T));
+            i = rhsSize;
         }
         else
         {
@@ -246,7 +244,7 @@ inline bool vector<T, Capacity>::emplace(const uint64_t position, Targs&&... arg
 template <typename T, uint64_t Capacity>
 inline bool vector<T, Capacity>::push_back(const T& value) noexcept
 {
-    return emplace_back(value);// parasoft-cov-suppress ALL "ingore"
+    return emplace_back(value);
 }
 
 template <typename T, uint64_t Capacity>
@@ -412,10 +410,10 @@ inline bool vector<T, Capacity>::erase(iterator position) noexcept
         uint64_t n{index};
         if constexpr (std::is_trivially_copyable<T>::value)
         {
-            if constexpr (!(std::is_trivially_destructible<T>::value))
+            /*if constexpr (!(std::is_trivially_destructible<T>::value))
             {
-                at_unchecked(n).~T(); // parasoft-cov-suppress ALL "ingore"
-            }
+                at_unchecked(n).~T();
+            }*/
             uint64_t dataLen{size() - n - 1U};
             std::memmove(data() + n, data() + n + 1U, static_cast<size_t>(dataLen) * sizeof(T));
         }

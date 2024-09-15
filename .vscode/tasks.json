@@ -28,13 +28,25 @@
     {
       "label": "CMake (Local): Clean",
       "type": "shell",
-      "command": "bash -c 'cmake --build build --target clean'",
+      "command": "bash -c 'cmake --build build --target clean; rm -Rf ./iceoryx_meta/.coverage; rm ./build/cpptest-coverage/iceoryx_meta/iceoryx_meta.clog;'",
       "group": "build"
     },
     {
       "label": "CMake (DC): Clean",
       "type": "shell",
-      "command": "bash -c 'cmake --build build --target clean'",
+      "command": "bash -c 'cmake --build build --target clean; rm -Rf ./iceoryx_meta/.coverage; rm ./build/cpptest-coverage/iceoryx_meta/iceoryx_meta.clog;'",
+      "group": "build"
+    },
+    {
+      "label": "CMake (Local): Clean Coverage",
+      "type": "shell",
+      "command": "bash -c 'rm -Rf ./iceoryx_meta/.coverage; rm ./build/cpptest-coverage/iceoryx_meta/iceoryx_meta.clog;'",
+      "group": "build"
+    },
+    {
+      "label": "CMake (DC): Clean Coverage",
+      "type": "shell",
+      "command": "bash -c 'rm -Rf ./iceoryx_meta/.coverage; rm ./build/cpptest-coverage/iceoryx_meta/iceoryx_meta.clog;'",
       "group": "build"
     },
     {
