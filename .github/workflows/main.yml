@@ -13,8 +13,9 @@ on:
   workflow_dispatch:
 
 env:
-  LINE_COV_GATE: 70
-  MCDC_COV_GATE: 30
+  LINE_COV_GATE: 100
+  MCDC_COV_GATE: 90
+  DTP_PROJECT: iceoryx
 
 permissions:
   contents: read
@@ -81,6 +82,12 @@ jobs:
         shell: bash
         # Execute the build.  You can specify a specific target with "--target <NAME>"
         run:  cpptestcov report html .coverage -code -out .coverage/coverage.html
+
+      - name: Publish Reports to DTP
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        # Execute the build.  You can specify a specific target with "--target <NAME>"
+        run:  cpptestcov report dtp -property build.id=${build_id} -property dtp.project=${DTP_PROJECT} .coverage gtest_results.xml
         
       - name: Setup Pages
         uses: actions/configure-pages@v3
