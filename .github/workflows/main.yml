@@ -36,7 +36,7 @@ jobs:
 
       # Checks out your repository under $GITHUB_WORKSPACE, so that your job can access it.
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set build id
         shell: bash
@@ -51,7 +51,7 @@ jobs:
       # Builds your CMake project. (This step is optional, as it is not required for code analysis).
       - name: Build Project
         run: |
-          cmake --build build -j24 -v
+          cmake --build build -j24
 
       - name: Run Unit Tests
         run: |
@@ -88,10 +88,10 @@ jobs:
         run:  cpptestcov report dtp -property build.id=${build_id} -property dtp.project=${DTP_PROJECT} .coverage gtest_results.xml
         
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload coverage reports
           path: ${{github.workspace}}/build/.coverage
@@ -107,7 +107,7 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
 
       - name: Show Coverage HTML Link
         shell: bash

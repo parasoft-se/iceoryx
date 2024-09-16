@@ -36,7 +36,7 @@ jobs:
 
       # Checks out your repository under $GITHUB_WORKSPACE, so that your job can access it.
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set build id
         shell: bash
@@ -51,7 +51,7 @@ jobs:
       # Builds your CMake project. (This step is optional, as it is not required for code analysis).
       - name: Build Project
         run: |
-          cmake --build build -j24 -v
+          cmake --build build -j24
 
       - name: Run Unit Tests
         run: |
