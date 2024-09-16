@@ -1513,7 +1513,7 @@ TEST_F(vector_test, EmplaceWhenFullReturnsFalse)
 }
 
 
-/**//*
+/**/
 TEST_F(vector_test, EmplaceWhenPositionExceedsCapacityReturnsFalse)
 {
     ::testing::Test::RecordProperty("TEST_ID", "519d97fb-aec0-4824-9cd7-dd3446b7b71c");
