@@ -52,13 +52,13 @@
     {
       "label": "CMake (DC): Compute Coverage, Index, And Generate Reports",
       "type": "shell",
-      "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-report'",
+      "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-suppress cpptestcov-report'",
       "group": "build"
     },
     {
       "label": "CMake (Local): Compute Coverage, Index, And Generate Reports",
       "type": "shell",
-      "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-report'",
+      "command": "bash -c 'make -C build cpptestcov-compute cpptestcov-suppress cpptestcov-report'",
       "group": "build"
     }
   ]
