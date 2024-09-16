@@ -119,13 +119,17 @@ jobs:
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Query for project's coverage and compare with the gate requirements
-        run: NUMBER=$(cpptestcov query -coverage LC .coverage) && if [ $NUMBER -lt $LINE_COV_GATE ]; then echo "LINE coverage quality gate failed"; echo "Expected result $LINE_COV_GATE%, echieved $NUMBER%"; false; else echo "LINE coverage quality gate passed with $NUMBER% (required $LINE_COV_GATE%)"; true; fi  
+        run: |
+          NUMBER=$(cpptestcov query -coverage LC .coverage) && if [ $NUMBER -lt $LINE_COV_GATE ]; then echo "LINE coverage quality gate failed"; echo "Expected result $LINE_COV_GATE%, echieved $NUMBER%"; false; else echo "LINE coverage quality gate passed with $NUMBER% (required $LINE_COV_GATE%)"; true; fi  
+          echo "Check html report https://parasoft-se.github.io/iceoryx/coverage.html"
         
       - name: MCDC Coverage Quality Gate
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Query for project's coverage and compare with the gate requirements
-        run: NUMBER=$(cpptestcov query -coverage MCDC .coverage) && if [ $NUMBER -lt $MCDC_COV_GATE ]; then echo "MCDC coverage quality gate failed"; echo "Expected result $MCDC_COV_GATE%, echieved $NUMBER%"; false; else echo "MCDC coverage quality gate passed with $NUMBER% (required $MCDC_COV_GATE%)"; true; fi  
+        run: |
+          NUMBER=$(cpptestcov query -coverage MCDC .coverage) && if [ $NUMBER -lt $MCDC_COV_GATE ]; then echo "MCDC coverage quality gate failed"; echo "Expected result $MCDC_COV_GATE%, echieved $NUMBER%"; false; else echo "MCDC coverage quality gate passed with $NUMBER% (required $MCDC_COV_GATE%)"; true; fi  
+          echo "Check html report https://parasoft-se.github.io/iceoryx/coverage.html"
 
       
         
