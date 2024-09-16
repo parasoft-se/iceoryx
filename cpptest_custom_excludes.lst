@@ -1,0 +1,16 @@
+-exclude iceoryx_hoofs/test/integrationtests/*.cpp
+-exclude iceoryx_hoofs/test/mocktests/*.cpp
+-exclude iceoryx_hoofs/test/moduletests/*.cpp
+-exclude iceoryx_hoofs/test/stresstests/*.cpp
+-exclude iceoryx_hoofs/testing/error_reporting/*.cpp
+-exclude iceoryx_hoofs/testing/mocks/*.cpp
+-exclude iceoryx/iceoryx_platform/test/integrationtests/*.cpp
+-exclude iceoryx/iceoryx_platform/test/moduletests/*.cpp
+-exclude iceoryx_posh/test/integrationtests/*.cpp
+-exclude iceoryx_posh/test/mocks/*.cpp
+-exclude iceoryx_posh/test/moduletests/*.cpp
+-exclude iceoryx_posh/testing/source/*.cpp
+-exclude iceoryx_examples/*
+-exclude iceoryx_binding_c/test/integrationtests/*.cpp
+-exclude iceoryx_binding_c/test/mocks/*.cpp
+-exclude iceoryx_binding_c/test/moduletests/*.cpp

@@ -1,5 +1,7 @@
 {
   "cmake.sourceDirectory": "/home/cboxrieder/Development/iceoryx/iceoryx_examples/ice_access_control",
   "cpptest.compilerIdentifier": "gcc_13-64",
-  "cpptest.coverageDataFolder": "${workspaceFolder}/iceoryx_meta/.coverage"
+  "cpptest.coverageDataFolder": "${workspaceFolder}/iceoryx_meta/.coverage",
+  "cpptest.commandLinePattern": "cpptestcli ${stopFile} ${compilerConfig} ${testConfig} ${reportDir} ${selectedFiles} -module . -include ${workspaceFolder}/cpptest_custom_includes.lst -exclude ${workspaceFolder}/cpptest_custom_excludes.lst -input build/compile_commands.json",
+  "cpptest.testConfiguration": "builtin://MISRA C 2023 (MISRA C 2012)"
 }
