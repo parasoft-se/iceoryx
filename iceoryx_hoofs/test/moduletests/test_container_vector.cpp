@@ -1498,7 +1498,7 @@ TEST_F(vector_test, EmplaceInTheMiddleMovesElementsToTheRight)
     EXPECT_THAT(sut[3], Eq(2U));
 }
 
-/**//*
+/**/
 TEST_F(vector_test, EmplaceWhenFullReturnsFalse)
 {
     ::testing::Test::RecordProperty("TEST_ID", "93e5d45c-9450-4ceb-8d1c-78aae413eca8");
